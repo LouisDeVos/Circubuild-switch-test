@@ -11,12 +11,17 @@ import { Document, Page } from 'react-pdf/dist/esm/entry.webpack5';
 
 function App() {
   const [mat, setMat] = useState("");
+  //Deze useState variabele wordt het antwoord op de query, hier is het een resultaat van een dropdown en het bepaalt direct welke "case" de switch kiest.
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
- 
+ //Deze variabelen zijn nodig om te kunnen navigeren door een pdf via react-pdf
+
+
+
+
   const handleChange = (event) => {
     setMat(event.target.value);
-    //console.log(mat);
+    //Hangt samen met de dropdown
     
   };
 
@@ -25,24 +30,30 @@ function App() {
       case "0":
           console.log("not chosen")
           document.getElementById('name').textContent = "Please choose a material"
-          document.getElementById('download').href= "./WRAP.pdf"
-          document.getElementById('download').textContent= "Download PDF"
+          document.getElementById('download').href= "./FCRBE.pdf"
+          document.getElementById('download').textContent= "Download Intro"
           //document.getElementById('viewer').file= "./WRAP.pdf"
         break;
 
       case "1":
           console.log("concrete shear wall")
           document.getElementById('name').textContent = "You chose a concrete shear wall"
+          document.getElementById('download').href= "./concrete.pdf"
+          document.getElementById('download').textContent= "Download PDF"
         break;
 
       case "2":
           console.log("metal cladding")
           document.getElementById('name').textContent = "You chose a metal cladding"
+          document.getElementById('download').href= "./metal.pdf"
+          document.getElementById('download').textContent= "Download PDF"
         break;
 
       case "3":
           console.log("door")
           document.getElementById('name').textContent = "You chose a door"
+          document.getElementById('download').href= "./door.pdf"
+          document.getElementById('download').textContent= "Download PDF"
         break;
 
       default: console.log("default")
@@ -50,6 +61,8 @@ function App() {
     }
 
   }
+
+  //De switch bepaalt nu enkel de url van de download knop en geeft via een <p> zicht op de juiste werking. Het is mij nog niet gelukt om de "file" property van de Page component aan te passen afh van de switch, ik krijg een wit scherm zonder errors.
 
   function onDocumentLoadSuccess({numPages}){
     setNumPages(numPages);
@@ -67,6 +80,8 @@ function App() {
   function changePageNext(){
     changePage(+1)
   }
+
+  //Functies om te kunnen navigeren in de pdf.
 
   return (
     <>
@@ -93,12 +108,17 @@ function App() {
           <MenuItem value={"3"}>Doors</MenuItem>
         </Select>
       </FormControl>
+      
       <Button onClick={showPDF(mat)} variant="disabled">Show PDF</Button>
+
+{/* Deze knop werkt niet, maar is wel nodig om de switch te laten werken. Waarom is voor mij nog een mysterie, je kan miss proberen om die verwijderen, maar dat gaf bij mij een probleem (switch functie werkte niet meer). */}
+
       <p id="name"></p>
-      <a id="download" href='./FCRBE.pdf' target = "_blank">.</a>
+
       <center>
+      <div><Button id="download" href='./FCRBE.pdf' target = "_blank" variant="contained"></Button></div>
         <Document id="viewer" file="/FCRBE.pdf" onLoadSuccess={onDocumentLoadSuccess}>
-          <Page height="1200" pageNumber={pageNumber}/>
+          <Page id="page" height="1000" pageNumber={pageNumber}/>
         </Document>
         <p>Page {pageNumber} of {numPages}</p>
         { pageNumber >1 &&
