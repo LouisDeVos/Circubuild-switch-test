@@ -30,7 +30,7 @@ function App() {
       case "0":
           console.log("not chosen")
           document.getElementById('name').textContent = "Please choose a material"
-          document.getElementById('download').href= "./FCRBE.pdf"
+          document.getElementById('download').href= "http://localhost:5000/Louis-De-Vos/lbd/voorpost/pdfs/FCRBE.pdf"
           document.getElementById('download').textContent= "Download Intro"
           //document.getElementById('viewer').file= "./WRAP.pdf"
         break;
@@ -38,21 +38,21 @@ function App() {
       case "1":
           console.log("concrete shear wall")
           document.getElementById('name').textContent = "You chose a concrete shear wall"
-          document.getElementById('download').href= "./concrete.pdf"
+          document.getElementById('download').href= "http://localhost:5000/Louis-De-Vos/lbd/voorpost/pdfs/concrete.pdf"
           document.getElementById('download').textContent= "Download PDF"
         break;
 
       case "2":
           console.log("metal cladding")
           document.getElementById('name').textContent = "You chose a metal cladding"
-          document.getElementById('download').href= "./metal.pdf"
+          document.getElementById('download').href= "http://localhost:5000/Louis-De-Vos/lbd/voorpost/pdfs/metal.pdf"
           document.getElementById('download').textContent= "Download PDF"
         break;
 
       case "3":
           console.log("door")
           document.getElementById('name').textContent = "You chose a door"
-          document.getElementById('download').href= "./door.pdf"
+          document.getElementById('download').href= "http://localhost:5000/Louis-De-Vos/lbd/voorpost/pdfs/door.pdf"
           document.getElementById('download').textContent= "Download PDF"
         break;
 
@@ -116,7 +116,7 @@ function App() {
       <p id="name"></p>
 
       <center>
-      <div><Button id="download" href='./FCRBE.pdf' target = "_blank" variant="contained"></Button></div>
+      <div><Button id="download" href='http://localhost:5000/Louis-De-Vos/lbd/voorpost/pdfs/FCRBE.pdf' target = "_blank" variant="contained"></Button></div>
         <Document id="viewer" file="/FCRBE.pdf" onLoadSuccess={onDocumentLoadSuccess}>
           <Page id="page" height="1000" pageNumber={pageNumber}/>
         </Document>
